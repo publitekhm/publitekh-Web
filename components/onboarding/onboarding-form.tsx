@@ -5,7 +5,7 @@ import Link from "next/link";
 import { OnboardingProgress } from "@/components/onboarding/onboarding-progress";
 import { OnboardingSection } from "@/components/onboarding/onboarding-section";
 import { onboardingSections, requiredOnboardingIds } from "@/lib/onboarding-data";
-import { onboardingDemoData } from "@/lib/onboarding-demo-data";
+import { generateOnboardingDemoData, onboardingDemoNiches, type OnboardingDemoNiche } from "@/lib/onboarding-demo-data";
 import { buildOnboardingPayload, validateOnboardingPayload } from "@/lib/onboarding-payload";
 import type { OnboardingApiResponse } from "@/types/api";
 import type { OnboardingAnswers, OnboardingFormStatus, OnboardingPlanSelection } from "@/types/onboarding";
@@ -22,6 +22,8 @@ export function OnboardingForm({ allowDemo, selection }: OnboardingFormProps) {
   const [openSections, setOpenSections] = useState<number[]>([1]);
   const [status, setStatus] = useState<OnboardingFormStatus>("idle");
   const [submitError, setSubmitError] = useState("");
+  const [demoNiche, setDemoNiche] = useState<OnboardingDemoNiche>("clinica-dental");
+  const [demoMessage, setDemoMessage] = useState("");
 
   const completed = useMemo(
     () => requiredOnboardingIds.filter((id) => answers[id]?.trim()).length,
@@ -46,11 +48,13 @@ export function OnboardingForm({ allowDemo, selection }: OnboardingFormProps) {
   }
 
   function loadDemoData() {
-    setAnswers({ ...onboardingDemoData });
+    const niche = onboardingDemoNiches.find((item) => item.id === demoNiche);
+    setAnswers(generateOnboardingDemoData(demoNiche));
     setErrors({});
     setSelectionError("");
     setSubmitError("");
     setStatus("idle");
+    setDemoMessage(`Demo de ${niche?.label ?? "nicho"} cargada. Puedes revisarla antes de enviar.`);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -123,11 +127,24 @@ export function OnboardingForm({ allowDemo, selection }: OnboardingFormProps) {
   return (
     <form onSubmit={handleSubmit}>
       {allowDemo && (
-        <div className="mb-3 flex justify-end">
-          <button className="button-secondary px-3 py-2 text-xs" onClick={loadDemoData} type="button">
-            Cargar datos demo
-          </button>
-        </div>
+        <aside className="mb-4 rounded-2xl border border-petroleum/30 bg-panel/90 p-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-green-accent">Modo demo comercial</p>
+              <p className="mt-1 text-xs text-mist">Elige un nicho y carga datos de prueba para una demostración.</p>
+            </div>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <label className="sr-only" htmlFor="demo-niche">Nicho de demostración</label>
+              <select className="rounded-lg border border-petroleum/30 bg-[#111d22] px-3 py-2 text-xs text-fog outline-none" id="demo-niche" onChange={(event) => setDemoNiche(event.target.value as OnboardingDemoNiche)} value={demoNiche}>
+                {onboardingDemoNiches.map((niche) => <option key={niche.id} value={niche.id}>{niche.label}</option>)}
+              </select>
+              <button className="button-secondary whitespace-nowrap px-3 py-2 text-xs" onClick={loadDemoData} type="button">
+                Cargar demo del nicho
+              </button>
+            </div>
+          </div>
+          {demoMessage && <p className="mt-3 text-xs text-green-accent" role="status">{demoMessage}</p>}
+        </aside>
       )}
       <OnboardingProgress completed={completed} total={requiredOnboardingIds.length} />
       <div className="mt-6 flex flex-col gap-3">
