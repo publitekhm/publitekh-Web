@@ -5,13 +5,17 @@ import Link from "next/link";
 import { OnboardingProgress } from "@/components/onboarding/onboarding-progress";
 import { OnboardingSection } from "@/components/onboarding/onboarding-section";
 import { onboardingSections, requiredOnboardingIds } from "@/lib/onboarding-data";
-import type { OnboardingAnswers, OnboardingPlanSelection } from "@/types/onboarding";
+import { buildOnboardingPayload, validateOnboardingPayload } from "@/lib/onboarding-payload";
+import type { OnboardingApiResponse } from "@/types/api";
+import type { OnboardingAnswers, OnboardingFormStatus, OnboardingPlanSelection } from "@/types/onboarding";
 
 export function OnboardingForm({ selection }: { selection: OnboardingPlanSelection | null }) {
   const [answers, setAnswers] = useState<OnboardingAnswers>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [selectionError, setSelectionError] = useState("");
   const [openSections, setOpenSections] = useState<number[]>([1]);
-  const [success, setSuccess] = useState(false);
+  const [status, setStatus] = useState<OnboardingFormStatus>("idle");
+  const [submitError, setSubmitError] = useState("");
 
   const completed = useMemo(
     () => requiredOnboardingIds.filter((id) => answers[id]?.trim()).length,
@@ -25,48 +29,78 @@ export function OnboardingForm({ selection }: { selection: OnboardingPlanSelecti
       delete next[id];
       return next;
     });
+    if (status === "error") {
+      setStatus("idle");
+      setSubmitError("");
+    }
   }
 
   function toggleSection(id: number) {
     setOpenSections((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = Object.fromEntries(
+    const payload = buildOnboardingPayload(answers, selection);
+    const minimumValidation = validateOnboardingPayload(payload);
+    const requiredErrors = Object.fromEntries(
       requiredOnboardingIds.filter((id) => !answers[id]?.trim()).map((id) => [id, "Este campo es obligatorio."]),
     );
+    const nextErrors = { ...requiredErrors, ...minimumValidation.fieldErrors };
     setErrors(nextErrors);
+    setSelectionError(minimumValidation.selectionError ?? "");
+    setSubmitError("");
 
-    if (Object.keys(nextErrors).length > 0) {
+    if (Object.keys(nextErrors).length > 0 || minimumValidation.selectionError) {
+      setStatus("error");
       const firstId = Object.keys(nextErrors)[0];
-      const section = onboardingSections.find((item) => item.questions.some((question) => question.id === firstId));
-      if (section) setOpenSections((current) => [...new Set([...current, section.id])]);
-      window.setTimeout(() => document.getElementById(`question-${firstId}`)?.scrollIntoView({ behavior: "smooth", block: "center" }), 50);
+      if (firstId) {
+        const section = onboardingSections.find((item) => item.questions.some((question) => question.id === firstId));
+        if (section) setOpenSections((current) => [...new Set([...current, section.id])]);
+        window.setTimeout(() => document.getElementById(`question-${firstId}`)?.scrollIntoView({ behavior: "smooth", block: "center" }), 50);
+      }
       return;
     }
 
-    const payload = {
-      ...answers,
-      servicio_interes: selection?.servicio_interes ?? null,
-      plan_interes: selection?.plan_interes ?? null,
-      documentos_archivos: [],
-      audios_clonacion_archivos: [],
-      origen: "formulario_onboarding_publitek",
-      fecha_envio: new Date().toISOString(),
-    };
-    console.log("[Publitek onboarding]", payload);
-    setSuccess(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setStatus("loading");
+
+    if (process.env.NODE_ENV === "development") {
+      console.log("[Publitek onboarding]", payload);
+    }
+
+    try {
+      const response = await fetch("/api/onboarding", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const result = (await response.json()) as OnboardingApiResponse;
+
+      if (!response.ok || !result.success) {
+        if (!result.success) {
+          setErrors((current) => ({ ...current, ...(result.fields ?? {}) }));
+          setSelectionError(result.selectionError ?? "");
+          setSubmitError(result.error);
+        }
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      setSubmitError("No pudimos enviar el onboarding. Intenta nuevamente.");
+      setStatus("error");
+    }
   }
 
-  if (success) {
+  if (status === "success") {
     return (
       <div className="onboarding-success">
         <span>✓</span>
         <p className="section-eyebrow justify-center">onboarding recibido</p>
         <h2>Ya tenemos todo para empezar</h2>
-        <p>Tu información quedó preparada localmente. El equipo de Publitek podrá convertirla en la configuración inicial de tu agente.</p>
+        <p>Recibimos tu información. El equipo de Publitek comenzará la configuración inicial de tu agente.</p>
         <Link className="button-primary mt-7 px-7 py-3.5" href="/">Volver a Publitek →</Link>
       </div>
     );
@@ -82,8 +116,12 @@ export function OnboardingForm({ selection }: { selection: OnboardingPlanSelecti
       </div>
       <div className="onboarding-submit">
         {Object.keys(errors).length > 0 && <p>Completa los campos obligatorios marcados antes de enviar.</p>}
-        <button className="button-primary px-8 py-4" type="submit">Enviar formulario →</button>
-        <span>Por ahora se guardará únicamente en la consola del navegador.</span>
+        {selectionError && <p>{selectionError}</p>}
+        {submitError && <p role="alert">{submitError}</p>}
+        <button className="button-primary px-8 py-4 disabled:cursor-wait disabled:opacity-70" disabled={status === "loading"} type="submit">
+          {status === "loading" ? "Enviando..." : "Enviar formulario →"}
+        </button>
+        <span>Enviaremos tus respuestas de forma segura al equipo de Publitek.</span>
       </div>
     </form>
   );

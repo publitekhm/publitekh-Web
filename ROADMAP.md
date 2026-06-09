@@ -18,6 +18,11 @@
 - [x] Conectar CTAs de planes con el onboarding completo de 32 preguntas.
 - [x] Validar y mostrar `servicio` y `plan` seleccionados en `/onboarding`.
 - [x] Incluir `servicio_interes` y `plan_interes` en el payload local del onboarding.
+- [x] Definir el contrato semántico tipado del onboarding para n8n.
+- [x] Mantener `respuestas_raw` con `q1` a `q32`.
+- [x] Validar empresa, descripción, WhatsApp, servicio y plan antes de procesar.
+- [x] Crear `POST /api/onboarding` como proxy server-side hacia n8n.
+- [x] Conectar el formulario completo al workflow sin exponer el webhook.
 
 ## Integración Supabase
 
@@ -47,5 +52,4 @@
 - Dashboard.
 - Pagos.
 - Twilio.
-- n8n.
 - Cambios de schema o RLS.

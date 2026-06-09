@@ -1,4 +1,5 @@
 import type { LeadErrors } from "@/types/lead";
+import type { OnboardingPayloadValidation } from "@/types/onboarding";
 
 export interface ApiSuccess<T> {
   success: true;
@@ -16,3 +17,12 @@ export interface LeadCreated {
 }
 
 export type LeadApiResponse = ApiSuccess<LeadCreated> | ApiError;
+
+export interface OnboardingApiError {
+  success: false;
+  error: string;
+  fields?: OnboardingPayloadValidation["fieldErrors"];
+  selectionError?: string;
+}
+
+export type OnboardingApiResponse = ApiSuccess<Record<string, never>> | OnboardingApiError;
