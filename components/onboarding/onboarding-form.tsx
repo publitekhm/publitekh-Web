@@ -5,11 +5,17 @@ import Link from "next/link";
 import { OnboardingProgress } from "@/components/onboarding/onboarding-progress";
 import { OnboardingSection } from "@/components/onboarding/onboarding-section";
 import { onboardingSections, requiredOnboardingIds } from "@/lib/onboarding-data";
+import { onboardingDemoData } from "@/lib/onboarding-demo-data";
 import { buildOnboardingPayload, validateOnboardingPayload } from "@/lib/onboarding-payload";
 import type { OnboardingApiResponse } from "@/types/api";
 import type { OnboardingAnswers, OnboardingFormStatus, OnboardingPlanSelection } from "@/types/onboarding";
 
-export function OnboardingForm({ selection }: { selection: OnboardingPlanSelection | null }) {
+interface OnboardingFormProps {
+  allowDemo: boolean;
+  selection: OnboardingPlanSelection | null;
+}
+
+export function OnboardingForm({ allowDemo, selection }: OnboardingFormProps) {
   const [answers, setAnswers] = useState<OnboardingAnswers>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [selectionError, setSelectionError] = useState("");
@@ -37,6 +43,14 @@ export function OnboardingForm({ selection }: { selection: OnboardingPlanSelecti
 
   function toggleSection(id: number) {
     setOpenSections((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+  }
+
+  function loadDemoData() {
+    setAnswers({ ...onboardingDemoData });
+    setErrors({});
+    setSelectionError("");
+    setSubmitError("");
+    setStatus("idle");
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -108,6 +122,13 @@ export function OnboardingForm({ selection }: { selection: OnboardingPlanSelecti
 
   return (
     <form onSubmit={handleSubmit}>
+      {allowDemo && (
+        <div className="mb-3 flex justify-end">
+          <button className="button-secondary px-3 py-2 text-xs" onClick={loadDemoData} type="button">
+            Cargar datos demo
+          </button>
+        </div>
+      )}
       <OnboardingProgress completed={completed} total={requiredOnboardingIds.length} />
       <div className="mt-6 flex flex-col gap-3">
         {onboardingSections.map((section) => (

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 interface OnboardingPageProps {
-  searchParams: Promise<{ servicio?: string | string[]; plan?: string | string[] }>;
+  searchParams: Promise<{ servicio?: string | string[]; plan?: string | string[]; demo?: string | string[] }>;
 }
 
 export default async function OnboardingPage({ searchParams }: OnboardingPageProps) {
@@ -17,6 +17,7 @@ export default async function OnboardingPage({ searchParams }: OnboardingPagePro
   const servicio = typeof params.servicio === "string" ? params.servicio : undefined;
   const plan = typeof params.plan === "string" ? params.plan : undefined;
   const selection = getOnboardingPlanSelection(servicio, plan);
+  const allowDemo = process.env.NODE_ENV === "development" || params.demo === "true";
 
   return (
     <main className="onboarding-page">
@@ -38,7 +39,7 @@ export default async function OnboardingPage({ searchParams }: OnboardingPagePro
         <h1>Construyamos un agente<br /><em>que suene a tu negocio</em></h1>
         <p>Estas 32 respuestas serán la base para configurar su personalidad, conocimiento y reglas de operación.</p>
       </div>
-      <div className="onboarding-container"><OnboardingForm selection={selection} /></div>
+      <div className="onboarding-container"><OnboardingForm allowDemo={allowDemo} selection={selection} /></div>
     </main>
   );
 }
