@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
+import { DemoAccess } from "@/components/layout/demo-access";
 import { LeadModalProvider } from "@/components/ui/lead-modal";
 
 const dmSans = DM_Sans({
@@ -27,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${dmSans.variable} ${fraunces.variable}`}>
-        <LeadModalProvider>{children}</LeadModalProvider>
+        <LeadModalProvider>
+          {children}
+          <DemoAccess />
+        </LeadModalProvider>
       </body>
     </html>
   );

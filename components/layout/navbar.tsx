@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
+import { DEMO_ENABLED_EVENT, DEMO_STORAGE_KEY } from "@/components/layout/demo-access";
 import { useLeadModal } from "@/components/ui/lead-modal";
 import { getOnboardingHref } from "@/lib/plans";
 
@@ -12,6 +14,18 @@ const links = [
 
 export function Navbar() {
   const { openLeadModal } = useLeadModal();
+  const logoClicks = useRef<number[]>([]);
+
+  function handleLogoClick() {
+    const now = Date.now();
+    logoClicks.current = [...logoClicks.current.filter((timestamp) => now - timestamp < 1800), now];
+
+    if (logoClicks.current.length >= 5) {
+      window.localStorage.setItem(DEMO_STORAGE_KEY, "true");
+      window.dispatchEvent(new Event(DEMO_ENABLED_EVENT));
+      logoClicks.current = [];
+    }
+  }
 
   return (
     <header className="fixed inset-x-0 top-3 z-50 px-4">
@@ -19,7 +33,7 @@ export function Navbar() {
         aria-label="Navegación principal"
         className="mx-auto flex h-14 max-w-5xl items-center justify-between rounded-2xl border border-petroleum/30 bg-ink/80 px-4 shadow-nav backdrop-blur-xl sm:px-5"
       >
-        <a className="group flex items-center gap-2 font-display text-xl font-bold" href="#inicio">
+        <a className="group flex items-center gap-2 font-display text-xl font-bold" href="#inicio" onClick={handleLogoClick}>
           <span className="h-5 w-1 rounded-full bg-gradient-to-b from-green-accent to-petroleum-light transition-transform group-hover:scale-y-75" />
           Publitek
         </a>
