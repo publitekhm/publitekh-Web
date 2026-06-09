@@ -15,6 +15,9 @@
 - [x] Fase 5: integración Supabase para captura de leads cerrada.
 - [x] Paso 2: ruta `/onboarding` migrada al sistema visual de Publitek.
 - [x] Paso 4: ruta `/dashboard-demo` migrada con datos mock.
+- [x] Dashboard MVP reorganizado en componentes reutilizables.
+- [x] Dashboard MVP con Resumen, Analíticas, Leads, IA/Humano y Pagos.
+- [x] Añadir mocks de uso del plan, pipeline, audios, pagos y handoffs.
 - [x] Conectar CTAs de planes con el onboarding completo de 32 preguntas.
 - [x] Validar y mostrar `servicio` y `plan` seleccionados en `/onboarding`.
 - [x] Incluir `servicio_interes` y `plan_interes` en el payload local del onboarding.

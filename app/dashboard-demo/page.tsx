@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AppShell } from "@/components/dashboard/app-shell";
+import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 
 export const metadata: Metadata = {
   title: "Dashboard Demo | Publitek",
@@ -7,6 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardDemoPage() {
-  return <AppShell />;
+  return <DashboardShell />;
 }
-
