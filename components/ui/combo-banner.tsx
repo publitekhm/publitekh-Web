@@ -18,8 +18,8 @@ export function ComboBanner() {
       </div>
       <div className="flex items-center gap-4">
         <div className="text-right">
-          <p className="text-[0.68rem] text-slate line-through">desde $950/mes</p>
-          <p className="font-display text-3xl">$850 <span className="font-sans text-xs text-mist">/ mes</span></p>
+          <p className="text-[0.68rem] text-slate line-through">desde $600/mes</p>
+          <p className="font-display text-3xl">$510 <span className="font-sans text-xs text-mist">/ mes</span></p>
           <p className="text-[0.62rem] text-green-accent">ahorras ~$100/mes</p>
         </div>
         <Link className="button-primary whitespace-nowrap px-5 py-3 text-xs" href={getOnboardingHref("combo", "combo-growth")}>Quiero el combo →</Link>
