@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { DEMO_ENABLED_EVENT, DEMO_STORAGE_KEY } from "@/components/layout/demo-access";
 import { useLeadModal } from "@/components/ui/lead-modal";
@@ -31,11 +32,13 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-3 z-50 px-4">
       <nav
         aria-label="Navegación principal"
-        className="mx-auto flex h-14 max-w-5xl items-center justify-between rounded-2xl border border-petroleum/30 bg-ink/80 px-4 shadow-nav backdrop-blur-xl sm:px-5"
+        className="mx-auto flex h-14 max-w-[73.75rem] items-center justify-between rounded-2xl border border-petroleum/30 bg-ink/80 px-4 shadow-nav backdrop-blur-xl sm:px-5"
       >
-        <a className="group flex items-center gap-2 font-display text-xl font-bold" href="#inicio" onClick={handleLogoClick}>
-          <span className="h-5 w-1 rounded-full bg-gradient-to-b from-green-accent to-petroleum-light transition-transform group-hover:scale-y-75" />
-          Publitek
+        <a className="brand-logo group flex items-center gap-2 text-xl font-bold" href="#inicio" onClick={handleLogoClick}>
+          <span className="brand-logo-emblem">
+            <Image alt="" height={34} priority src="/publitek-seed.svg" width={34} />
+          </span>
+          <span>Publi<span className="brand-logo-tek">tek</span></span>
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">

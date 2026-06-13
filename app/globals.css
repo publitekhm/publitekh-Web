@@ -3,19 +3,44 @@
 @theme inline {
   --color-ink: #080c0e;
   --color-panel: #0c1518;
+  --color-card: #10151a;
+  --color-card-raised: #161c22;
   --color-petroleum: #0d3b47;
   --color-petroleum-light: #1a6b82;
   --color-green: #1a7a4a;
   --color-green-accent: #3ddb87;
   --color-wine: #6b1a2e;
   --color-wine-light: #d4607a;
+  --color-gold: #c9a84c;
+  --color-gold-light: #ead188;
+  --color-gold-dark: #9a7b2e;
   --color-fog: #e8f0f3;
   --color-mist: #7fa4b1;
   --color-slate: #426776;
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
+  --font-strong: var(--font-strong);
   --shadow-nav: 0 18px 60px rgba(0, 0, 0, 0.28);
   --shadow-panel: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+:root {
+  --brand-black: #050607;
+  --brand-black-secondary: #0a0d10;
+  --brand-card: #10151a;
+  --brand-card-raised: #161c22;
+  --brand-wine: #5c0e1e;
+  --brand-wine-bright: #a02540;
+  --brand-gold: #c9a84c;
+  --brand-gold-light: #ead188;
+  --brand-gold-dark: #9a7b2e;
+  --brand-petroleum: #0d3b36;
+  --brand-petroleum-mid: #1e6b5e;
+  --brand-petroleum-light: #2e9d8a;
+  --brand-text: #f4f1e9;
+  --brand-muted: #97a4ab;
+  --brand-border: rgba(255, 255, 255, 0.07);
+  --brand-border-strong: rgba(255, 255, 255, 0.12);
 }
 
 * {
@@ -496,6 +521,1526 @@ body::after {
   background: radial-gradient(circle, rgba(26, 122, 74, 0.1), transparent 60%);
   content: "";
   pointer-events: none;
+}
+
+/* Publitek premium visual skin: presentation only, no component behavior changes. */
+.marketing-page header nav {
+  border-color: var(--brand-border);
+  border-radius: 1rem;
+  background:
+    linear-gradient(90deg, rgba(13, 59, 54, 0.1), rgba(5, 6, 7, 0.88) 48%, rgba(92, 14, 30, 0.07)),
+    rgba(5, 6, 7, 0.82);
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.36), inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.brand-logo {
+  position: relative;
+  isolation: isolate;
+  font-family: var(--font-strong), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  color: var(--brand-text);
+}
+
+.brand-logo::before {
+  content: none;
+}
+
+.brand-logo-emblem {
+  position: relative;
+  display: grid;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex: 0 0 auto;
+  place-items: center;
+}
+
+.brand-logo-emblem::before {
+  position: absolute;
+  inset: -0.2rem;
+  z-index: -1;
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(201, 168, 76, 0.13);
+  content: "";
+  animation: brand-orbit 18s linear infinite;
+}
+
+.brand-logo-emblem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 7px rgba(201, 168, 76, 0.2));
+  animation: brand-breathe 7s ease-in-out infinite;
+}
+
+.brand-logo-emblem-small {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.brand-logo-tek {
+  background: linear-gradient(110deg, var(--brand-gold-dark) 20%, var(--brand-gold-light) 42%, var(--brand-gold) 58%, var(--brand-gold-light) 72%, var(--brand-gold-dark) 86%);
+  background-size: 200% auto;
+  background-clip: text;
+  color: transparent;
+  animation: brand-shimmer 7s linear infinite;
+}
+
+.hero-premium::before {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(ellipse 38% 32% at 50% 20%, rgba(201, 168, 76, 0.09), transparent 70%),
+    radial-gradient(ellipse 52% 48% at 0% 45%, rgba(13, 59, 54, 0.22), transparent 72%),
+    radial-gradient(ellipse 38% 42% at 93% 54%, rgba(92, 14, 30, 0.16), transparent 72%);
+  content: "";
+  pointer-events: none;
+}
+
+.hero-seed-atmosphere {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  z-index: -1;
+  display: grid;
+  width: min(31rem, 82vw);
+  height: min(31rem, 82vw);
+  transform: translateX(-50%);
+  place-items: center;
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.hero-seed-atmosphere img {
+  position: relative;
+  z-index: 2;
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 34px rgba(201, 168, 76, 0.3));
+  animation: emblem-breathe 7s ease-in-out infinite;
+}
+
+.hero-seed-glow {
+  position: absolute;
+  width: 68%;
+  height: 68%;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.28), rgba(201, 168, 76, 0.05) 45%, transparent 72%);
+  animation: glow-pulse 5s ease-in-out infinite;
+}
+
+.hero-seed-orbit {
+  position: absolute;
+  width: 94%;
+  height: 94%;
+  border: 1px solid rgba(30, 107, 94, 0.22);
+  border-radius: 999px;
+  box-shadow:
+    0 -0.2rem 0 -0.08rem rgba(46, 157, 138, 0.48),
+    0.2rem 0 0 -0.1rem rgba(122, 20, 40, 0.52);
+  animation: brand-orbit 80s linear infinite;
+}
+
+.hero-orb-petroleum {
+  background: radial-gradient(ellipse, rgba(13, 59, 54, 0.24), transparent 72%);
+}
+
+.hero-orb-wine {
+  background: radial-gradient(circle, rgba(92, 14, 30, 0.13), transparent 70%);
+}
+
+.hero-grid {
+  opacity: 0.11;
+  background-image:
+    linear-gradient(rgba(201, 168, 76, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.045) 1px, transparent 1px);
+}
+
+.hero-eyebrow {
+  border: 1px solid rgba(201, 168, 76, 0.24);
+  background: rgba(201, 168, 76, 0.065);
+  color: var(--brand-gold);
+  font-family: var(--font-strong), sans-serif;
+}
+
+.hero-eyebrow-dot {
+  background: var(--brand-gold);
+  box-shadow: 0 0 12px rgba(201, 168, 76, 0.7);
+}
+
+.hero-title {
+  font-weight: 600;
+  text-shadow: 0 16px 70px rgba(0, 0, 0, 0.45);
+}
+
+.hero-title .text-green-accent {
+  color: var(--brand-gold);
+}
+
+.hero-title .text-wine-light {
+  color: var(--brand-wine-bright);
+}
+
+.service-option {
+  border-radius: 0.95rem;
+}
+
+.service-option:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.service-option-active {
+  border-color: rgba(201, 168, 76, 0.2);
+  background: linear-gradient(145deg, rgba(22, 28, 34, 0.92), rgba(13, 59, 54, 0.28));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.service-icon-green {
+  border-color: rgba(201, 168, 76, 0.22);
+  background: rgba(201, 168, 76, 0.07);
+  color: var(--brand-gold);
+}
+
+.service-icon-wine {
+  border-color: rgba(160, 37, 64, 0.3);
+  background: rgba(92, 14, 30, 0.18);
+  color: var(--brand-wine-bright);
+}
+
+#servicios > p:first-child,
+#estadisticas dt {
+  font-family: var(--font-strong), sans-serif;
+}
+
+#servicios > div[role="tablist"] {
+  border-color: var(--brand-border);
+  border-radius: 1.25rem;
+  background: rgba(10, 13, 16, 0.78);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42), inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+#estadisticas {
+  border-color: var(--brand-border);
+  border-radius: 1.125rem;
+  background: var(--brand-border);
+}
+
+#estadisticas > div {
+  background: rgba(5, 6, 7, 0.88);
+}
+
+#estadisticas dd {
+  color: var(--brand-text);
+  font-weight: 600;
+}
+
+.section-shell {
+  border-color: var(--brand-border);
+}
+
+.marketing-page .section-eyebrow {
+  color: var(--brand-gold);
+  font-family: var(--font-strong), sans-serif;
+}
+
+.marketing-page .section-eyebrow::before {
+  background: var(--brand-gold);
+}
+
+.marketing-page .section-title {
+  color: var(--brand-text);
+  font-weight: 600;
+}
+
+.marketing-page .section-description {
+  color: var(--brand-muted);
+}
+
+.feature-grid {
+  gap: 1px;
+  border-color: var(--brand-border);
+  border-radius: 1.125rem;
+  background: var(--brand-border);
+}
+
+.feature-card {
+  background: var(--brand-black);
+}
+
+.feature-card:hover {
+  background: var(--brand-card);
+}
+
+.feature-card::before {
+  width: 100%;
+  height: 2px;
+  border-radius: 0;
+  background: var(--brand-petroleum-light);
+  transform: scaleX(0.08);
+  transform-origin: left;
+  transition: transform 240ms ease;
+}
+
+.feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-card:nth-child(3n + 2)::before {
+  background: var(--brand-gold);
+}
+
+.feature-card:nth-child(3n)::before {
+  background: var(--brand-wine-bright);
+}
+
+.feature-number {
+  color: #596871;
+  font-family: var(--font-strong), sans-serif;
+}
+
+.feature-symbol {
+  color: var(--brand-gold);
+}
+
+.feature-card h3 {
+  font-family: var(--font-strong), sans-serif;
+  font-weight: 700;
+}
+
+.pricing-tabs {
+  border-color: var(--brand-border);
+  background: var(--brand-card);
+}
+
+.pricing-tabs button {
+  color: var(--brand-muted);
+}
+
+.pricing-tabs button.active {
+  border-color: rgba(201, 168, 76, 0.28);
+  background: linear-gradient(135deg, var(--brand-gold-light), var(--brand-gold) 60%, var(--brand-gold-dark));
+  color: var(--brand-black);
+  font-weight: 700;
+}
+
+.pricing-card {
+  border-color: var(--brand-border);
+  border-radius: 1.125rem;
+  background: var(--brand-black-secondary);
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.12), inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.pricing-card:hover {
+  border-color: var(--brand-border-strong);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+}
+
+.pricing-card::after {
+  background: var(--brand-petroleum-mid);
+}
+
+.pricing-green::after {
+  background: var(--brand-gold);
+}
+
+.pricing-wine::after {
+  background: var(--brand-wine-bright);
+}
+
+.pricing-featured {
+  border-color: rgba(201, 168, 76, 0.34);
+  background: linear-gradient(170deg, rgba(201, 168, 76, 0.06), var(--brand-black-secondary) 54%);
+}
+
+.plan-badge {
+  background: linear-gradient(135deg, var(--brand-gold-light), var(--brand-gold-dark));
+  color: var(--brand-black);
+  font-family: var(--font-strong), sans-serif;
+}
+
+.plan-feature {
+  border-bottom-color: rgba(255, 255, 255, 0.035);
+  color: var(--brand-muted);
+}
+
+.plan-feature span {
+  color: var(--brand-gold);
+}
+
+.plan-button {
+  border-color: var(--brand-border-strong);
+  border-radius: 0.75rem;
+  min-height: 2.8rem;
+  color: var(--brand-text);
+}
+
+.plan-button:hover {
+  border-color: var(--brand-gold);
+  color: var(--brand-gold-light);
+}
+
+.plan-button-primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand-gold-light), var(--brand-gold) 60%, var(--brand-gold-dark));
+  color: var(--brand-black);
+}
+
+.pricing-petroleum .plan-button {
+  border-color: rgba(46, 157, 138, 0.42);
+  background: linear-gradient(135deg, rgba(13, 59, 54, 0.82), rgba(30, 107, 94, 0.72));
+  color: var(--brand-text);
+}
+
+.pricing-petroleum .plan-button:hover {
+  border-color: rgba(46, 157, 138, 0.62);
+  color: var(--brand-text);
+  box-shadow: 0 7px 22px rgba(30, 107, 94, 0.2);
+}
+
+.pricing-wine .plan-button {
+  border-color: rgba(160, 37, 64, 0.42);
+  background: linear-gradient(135deg, rgba(92, 14, 30, 0.78), rgba(122, 20, 40, 0.68));
+  color: var(--brand-text);
+}
+
+.pricing-wine .plan-button:hover {
+  border-color: rgba(160, 37, 64, 0.62);
+  color: var(--brand-text);
+  box-shadow: 0 7px 22px rgba(92, 14, 30, 0.24);
+}
+
+.plan-button-primary:hover {
+  color: var(--brand-black);
+  box-shadow: 0 8px 28px rgba(201, 168, 76, 0.24);
+}
+
+.combo-banner {
+  border-color: var(--brand-border-strong);
+  border-radius: 1.125rem;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(201, 168, 76, 0.07), transparent 28%),
+    linear-gradient(135deg, rgba(13, 59, 54, 0.42), rgba(92, 14, 30, 0.24)),
+    var(--brand-black-secondary);
+}
+
+.combo-chip {
+  border-color: var(--brand-border-strong);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.faq-item {
+  border-color: var(--brand-border);
+  border-radius: 0.875rem;
+  background: var(--brand-black-secondary);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.faq-item.open {
+  border-color: var(--brand-border-strong);
+}
+
+.faq-item button {
+  color: var(--brand-text);
+}
+
+.faq-item.open button span {
+  display: grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--brand-gold);
+  color: var(--brand-black);
+}
+
+.cta-section {
+  width: min(calc(100% - 3rem), 61.25rem);
+  margin: 0 auto 5rem;
+  border: 1px solid var(--brand-border-strong);
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, var(--brand-card), var(--brand-black-secondary));
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.28), inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.cta-section::before {
+  background:
+    radial-gradient(circle, rgba(201, 168, 76, 0.09), transparent 48%),
+    radial-gradient(circle at 35% 60%, rgba(13, 59, 54, 0.16), transparent 56%);
+}
+
+.cta-section .text-green-accent {
+  color: var(--brand-gold);
+}
+
+.marketing-page footer {
+  border-color: var(--brand-border);
+  background: rgba(5, 6, 7, 0.68);
+}
+
+@keyframes brand-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes brand-orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes brand-shimmer {
+  to { background-position: 200% center; }
+}
+
+@keyframes emblem-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.52; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  .marketing-page header nav {
+    height: 3.25rem;
+    padding-inline: 0.75rem;
+    border-radius: 0.9rem;
+  }
+
+  .brand-logo {
+    gap: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .brand-logo-emblem {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .hero-premium {
+    padding-top: 7rem;
+  }
+
+  .hero-seed-atmosphere {
+    top: 7%;
+    width: min(21rem, 90vw);
+    height: min(21rem, 90vw);
+    opacity: 0.095;
+  }
+
+  .hero-premium .button-primary,
+  .hero-premium .button-secondary,
+  .cta-section .button-primary,
+  .cta-section .button-secondary {
+    width: min(100%, 20rem);
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 16vw, 4.25rem);
+    line-height: 0.98;
+  }
+
+  #servicios > div[role="tablist"],
+  #estadisticas,
+  .feature-grid,
+  .pricing-card,
+  .combo-banner {
+    border-radius: 1rem;
+  }
+
+  .pricing-card {
+    padding: 1.5rem;
+  }
+
+  .cta-section {
+    width: min(calc(100% - 2rem), 61.25rem);
+    margin-bottom: 3rem;
+    padding: 4.75rem 1rem;
+    border-radius: 1.125rem;
+  }
+
+  .marketing-page footer {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Landing-only composition. Keeps the premium marketing skin away from product routes. */
+.marketing-page {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 48% 30% at 78% 12%, rgba(201, 168, 76, 0.055), transparent 72%),
+    radial-gradient(ellipse 44% 38% at 2% 26%, rgba(13, 59, 54, 0.15), transparent 72%),
+    radial-gradient(ellipse 38% 34% at 96% 44%, rgba(92, 14, 30, 0.11), transparent 72%),
+    var(--brand-black);
+  color: var(--brand-text);
+}
+
+.marketing-page .button-primary {
+  min-height: 3rem;
+  padding-block: 0.75rem;
+  border: 1px solid rgba(46, 157, 138, 0.42);
+  background: linear-gradient(135deg, #124a40 0%, var(--brand-petroleum-mid) 58%, var(--brand-petroleum-light) 100%);
+  color: var(--brand-text);
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(30, 107, 94, 0.2), inset 0 1px rgba(255, 255, 255, 0.09);
+}
+
+.marketing-page .button-primary:hover {
+  box-shadow: 0 10px 30px rgba(46, 157, 138, 0.24), inset 0 1px rgba(255, 255, 255, 0.13);
+  filter: brightness(1.04);
+}
+
+.marketing-page .button-secondary {
+  min-height: 3rem;
+  padding-block: 0.75rem;
+  border-color: rgba(201, 168, 76, 0.62);
+  background: rgba(5, 6, 7, 0.3);
+  color: var(--brand-text);
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.marketing-page .button-secondary:hover {
+  border-color: var(--brand-gold);
+  background: rgba(201, 168, 76, 0.06);
+  color: var(--brand-gold-light);
+}
+
+.marketing-page header nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+
+.marketing-page header nav > div:last-child {
+  justify-self: end;
+}
+
+.marketing-page .hero-premium {
+  min-height: auto;
+  text-align: left;
+}
+
+.marketing-page .hero-premium::before {
+  background:
+    radial-gradient(ellipse 32% 34% at 76% 29%, rgba(201, 168, 76, 0.1), transparent 72%),
+    radial-gradient(ellipse 46% 44% at 5% 42%, rgba(13, 59, 54, 0.19), transparent 74%),
+    radial-gradient(ellipse 34% 42% at 94% 58%, rgba(92, 14, 30, 0.13), transparent 74%);
+}
+
+.marketing-page .hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 73.75rem);
+  min-height: calc(100vh - 9rem);
+  margin-inline: auto;
+  grid-template-columns: minmax(0, 1.04fr) minmax(20rem, 0.96fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  margin-bottom: -2.625rem;
+  transform: translateY(-2.625rem);
+}
+
+.marketing-page .hero-copy {
+  max-width: 38rem;
+}
+
+.marketing-page .hero-title {
+  max-width: 36rem;
+  color: var(--brand-text);
+  font-size: clamp(2.75rem, 4.5vw, 4.15rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.marketing-page .hero-title .text-wine-light {
+  color: #873047;
+  opacity: 0.82;
+  text-shadow: 0 0 24px rgba(92, 14, 30, 0.16);
+}
+
+.marketing-page .hero-subtitle {
+  max-width: 31rem;
+  color: var(--brand-muted);
+}
+
+.marketing-page .hero-actions {
+  justify-content: flex-start;
+}
+
+.marketing-page .hero-emblem-panel {
+  position: relative;
+  display: flex;
+  min-height: 26rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.marketing-page .hero-seed-atmosphere {
+  position: relative;
+  top: auto;
+  left: auto;
+  z-index: 1;
+  width: min(23.75rem, 34vw);
+  height: min(23.75rem, 34vw);
+  transform: none;
+  opacity: 1;
+}
+
+.marketing-page .hero-seed-atmosphere img {
+  width: 76%;
+  height: 76%;
+  filter: drop-shadow(0 0 28px rgba(201, 168, 76, 0.24));
+}
+
+.marketing-page .hero-seed-glow {
+  width: 76%;
+  height: 76%;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.18), rgba(201, 168, 76, 0.035) 48%, transparent 73%);
+}
+
+.marketing-page .hero-seed-orbit {
+  width: 91%;
+  height: 91%;
+  border-color: rgba(201, 168, 76, 0.16);
+  box-shadow:
+    0 -0.18rem 0 -0.09rem rgba(201, 168, 76, 0.48),
+    0.18rem 0 0 -0.1rem rgba(46, 157, 138, 0.42),
+    -0.16rem 0 0 -0.1rem rgba(122, 20, 40, 0.36);
+}
+
+.marketing-page .hero-emblem-wordmark {
+  margin-top: -0.3rem;
+  color: var(--brand-text);
+  font-family: var(--font-strong), sans-serif;
+  font-size: clamp(1.7rem, 2.4vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.marketing-page .hero-emblem-wordmark span {
+  color: var(--brand-gold);
+}
+
+.marketing-page .hero-emblem-tagline {
+  margin-top: 0.45rem;
+  color: rgba(151, 164, 171, 0.72);
+  font-family: var(--font-display), serif;
+  font-size: 0.64rem;
+  font-style: italic;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.marketing-page .hero-conversion {
+  display: flex;
+  width: min(100%, 73.75rem);
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.marketing-page .hero-conversion #servicios,
+.marketing-page .hero-conversion #estadisticas {
+  margin-inline: auto;
+}
+
+@media (max-width: 900px) {
+  .marketing-page header nav {
+    display: flex;
+  }
+
+  .marketing-page .hero-layout {
+    min-height: auto;
+    margin-bottom: 0;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+    transform: none;
+  }
+
+  .marketing-page .hero-copy {
+    display: flex;
+    max-width: 42rem;
+    margin-inline: auto;
+    flex-direction: column;
+    align-items: center;
+    order: 2;
+  }
+
+  .marketing-page .hero-emblem-panel {
+    min-height: 18rem;
+    order: 1;
+  }
+
+  .marketing-page .hero-seed-atmosphere {
+    width: min(19rem, 68vw);
+    height: min(19rem, 68vw);
+  }
+
+  .marketing-page .hero-emblem-wordmark,
+  .marketing-page .hero-emblem-tagline {
+    display: none;
+  }
+
+  .marketing-page .hero-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .marketing-page .hero-premium {
+    padding-top: 6.25rem;
+  }
+
+  .marketing-page .hero-emblem-panel {
+    min-height: 15rem;
+  }
+
+  .marketing-page .hero-seed-atmosphere {
+    top: auto;
+    width: min(16rem, 72vw);
+    height: min(16rem, 72vw);
+    opacity: 1;
+  }
+
+  .marketing-page .hero-title {
+    font-size: clamp(2.5rem, 13vw, 3.45rem);
+    line-height: 1.03;
+  }
+}
+
+/* Landing Final parity: exact desktop geometry and restrained hero effects. */
+@media (min-width: 901px) {
+  .marketing-page header {
+    top: 0;
+    padding-inline: 0;
+  }
+
+  .marketing-page header nav {
+    width: 100%;
+    max-width: none;
+    height: 4.5rem;
+    padding-inline: 3rem;
+    border-width: 0 0 1px;
+    border-radius: 0;
+    background: rgba(5, 6, 7, 0.82);
+    box-shadow: none;
+    backdrop-filter: blur(20px);
+  }
+
+  .marketing-page header .brand-logo {
+    gap: 0.75rem;
+    font-size: 1.375rem;
+  }
+
+  .marketing-page header .brand-logo-emblem {
+    width: 2.625rem;
+    height: 2.625rem;
+  }
+
+  .marketing-page header .brand-logo-emblem::before {
+    display: none;
+  }
+
+  .marketing-page header .brand-logo-emblem img {
+    filter: none;
+    animation: none;
+  }
+
+  .marketing-page header nav ul {
+    gap: 0.375rem;
+  }
+
+  .marketing-page header nav ul a {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .marketing-page header nav > div:last-child {
+    gap: 0.875rem;
+  }
+
+  .marketing-page header .button-primary {
+    min-height: auto;
+    padding: 0.6875rem 1.375rem;
+    font-size: 0.875rem;
+  }
+
+  .marketing-page .hero-premium {
+    min-height: 100vh;
+    padding: 6.5rem 3rem 3.5rem;
+  }
+
+  .marketing-page .hero-premium::before {
+    background:
+      radial-gradient(ellipse 50% 45% at 78% 38%, rgba(201, 168, 76, 0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 55% 50% at 90% 80%, rgba(12, 58, 78, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 45% at 5% 90%, rgba(92, 14, 30, 0.16) 0%, transparent 60%);
+  }
+
+  .marketing-page .hero-orb {
+    display: none;
+  }
+
+  .marketing-page .hero-layout {
+    width: 100%;
+    min-height: calc(100vh - 10rem);
+    margin: 0;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 2.5rem;
+    transform: none;
+  }
+
+  .marketing-page .hero-copy {
+    max-width: none;
+  }
+
+  .marketing-page .hero-eyebrow {
+    gap: 0.5625rem;
+    margin-bottom: 1.75rem;
+    padding: 0.4375rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.09375rem;
+  }
+
+  .marketing-page .hero-title {
+    max-width: 52rem;
+    margin-bottom: 1.375rem;
+    font-size: clamp(2.25rem, 4.1vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.09375rem;
+  }
+
+  .marketing-page .hero-title .text-green-accent {
+    font-weight: 700;
+  }
+
+  .marketing-page .hero-title .text-wine-light {
+    opacity: 0.72;
+  }
+
+  .marketing-page .hero-subtitle {
+    max-width: 28.75rem;
+    margin-top: 0;
+    margin-bottom: 1.75rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .marketing-page .hero-actions {
+    gap: 0.875rem;
+    margin-top: 0;
+  }
+
+  .marketing-page .hero-actions .button-primary {
+    padding: 0.9375rem 1.875rem;
+    font-size: 0.9375rem;
+  }
+
+  .marketing-page .hero-actions .button-secondary {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .marketing-page .hero-emblem-panel {
+    min-height: 25rem;
+  }
+
+  .marketing-page .hero-seed-atmosphere {
+    width: 20.625rem;
+    height: 20.625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .marketing-page .hero-seed-atmosphere::after {
+    position: absolute;
+    bottom: 0.85rem;
+    left: 50%;
+    z-index: 1;
+    width: 12.5rem;
+    height: 1.875rem;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.5), transparent 70%);
+    content: "";
+    filter: blur(8px);
+    transform: translateX(-50%);
+  }
+
+  .marketing-page .hero-seed-atmosphere img {
+    width: 18.75rem;
+    height: 18.75rem;
+    filter:
+      drop-shadow(0 14px 30px rgba(0, 0, 0, 0.45))
+      drop-shadow(0 0 28px rgba(201, 168, 76, 0.28));
+    animation: hero-float-depth 7s ease-in-out infinite;
+  }
+
+  .marketing-page .hero-seed-glow {
+    width: 18.75rem;
+    height: 18.75rem;
+    background: radial-gradient(circle, rgba(201, 168, 76, 0.28), rgba(201, 168, 76, 0.06) 45%, transparent 70%);
+    animation: glow-pulse 5s ease-in-out infinite;
+  }
+
+  .marketing-page .hero-seed-orbit {
+    width: 20.625rem;
+    height: 20.625rem;
+    border-color: rgba(30, 107, 94, 0.18);
+    box-shadow:
+      0 -0.18rem 0 -0.09rem rgba(46, 157, 138, 0.7),
+      0.18rem 0 0 -0.1rem rgba(160, 37, 64, 0.6);
+  }
+
+  .marketing-page .hero-emblem-wordmark {
+    margin-top: 0;
+    font-size: 2.375rem;
+    letter-spacing: -0.0625rem;
+  }
+
+  .marketing-page .hero-emblem-tagline {
+    margin-top: 0.25rem;
+    color: var(--color-slate);
+    font-size: 0.8125rem;
+    letter-spacing: 0.1875rem;
+  }
+
+  .marketing-page .hero-grid {
+    opacity: 0.16;
+    background:
+      repeating-radial-gradient(circle at 92% 92%, transparent 0 1.65rem, rgba(160, 37, 64, 0.22) 1.7rem 1.75rem, transparent 1.8rem 2.7rem);
+  }
+
+  .marketing-page .hero-conversion {
+    padding-top: 2.5rem;
+  }
+}
+
+@keyframes hero-float-depth {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-10px) scale(1.015);
+  }
+}
+
+/* Final landing reference alignment. */
+.marketing-page .button-primary {
+  border-color: rgba(63, 196, 173, 0.35);
+  background: linear-gradient(135deg, var(--brand-petroleum-light) 0%, var(--brand-petroleum-mid) 55%, #124a40 100%);
+  box-shadow: 0 2px 16px rgba(30, 107, 94, 0.25);
+}
+
+.marketing-page .button-primary:hover {
+  box-shadow: 0 10px 30px rgba(46, 157, 138, 0.35);
+}
+
+.marketing-page .button-secondary {
+  border-color: var(--brand-petroleum-light);
+  background: transparent;
+  color: var(--brand-petroleum-light);
+}
+
+.marketing-page .button-secondary:hover {
+  border-color: var(--brand-petroleum-light);
+  background: rgba(46, 157, 138, 0.1);
+  color: #3fc4ad;
+}
+
+.marketing-page .section-shell {
+  width: min(100%, 73.75rem);
+  max-width: none;
+  padding: 6.875rem 3rem;
+}
+
+.marketing-page .section-shell > div + div {
+  margin-top: 6.875rem;
+}
+
+.marketing-page .section-eyebrow {
+  gap: 0.75rem;
+  margin-bottom: 1.125rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.15625rem;
+}
+
+.marketing-page .section-eyebrow::before {
+  width: 1.75rem;
+}
+
+.marketing-page .section-title {
+  max-width: 46rem;
+  margin-bottom: 1.125rem;
+  font-size: clamp(1.875rem, 4vw, 3.125rem);
+  letter-spacing: -0.09375rem;
+  line-height: 1.08;
+}
+
+.marketing-page .section-description {
+  max-width: 32.5rem;
+  color: var(--brand-muted);
+  line-height: 1.7;
+}
+
+.marketing-page .feature-grid {
+  margin-top: 3.75rem;
+  border-radius: 1.125rem;
+}
+
+.marketing-page .feature-card {
+  min-height: 13.25rem;
+  padding: 2.125rem 1.875rem;
+}
+
+.marketing-page .feature-card::before {
+  transform: scaleX(0);
+}
+
+.marketing-page .feature-card:nth-child(2)::before,
+.marketing-page .feature-card:nth-child(3)::before,
+.marketing-page .feature-card:nth-child(5)::before {
+  background: var(--brand-petroleum-light);
+}
+
+.marketing-page .feature-card:nth-child(4)::before {
+  background: var(--brand-wine-bright);
+}
+
+.marketing-page .feature-card:nth-child(1)::before,
+.marketing-page .feature-card:nth-child(6)::before {
+  background: var(--brand-gold);
+}
+
+.marketing-page .feature-card:hover::before {
+  transform: scaleX(1);
+}
+
+.marketing-page .feature-card h3 {
+  font-size: 1.0625rem;
+  letter-spacing: -0.01875rem;
+}
+
+.marketing-page .feature-card p {
+  color: var(--brand-muted);
+  font-size: 0.84375rem;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.marketing-page .pricing-tabs {
+  margin: 2.75rem 0;
+  padding: 0.3125rem;
+}
+
+.marketing-page .pricing-tabs button {
+  padding: 0.5625rem 1.375rem;
+  font-size: 0.84375rem;
+}
+
+.marketing-page .pricing-card {
+  padding: 2.125rem 1.875rem;
+}
+
+.marketing-page #faq > div {
+  max-width: 48.75rem;
+  margin-top: 3rem;
+  gap: 0.625rem;
+}
+
+.marketing-page .faq-item button {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9375rem;
+}
+
+.marketing-page .faq-answer p {
+  padding-inline: 1.5rem;
+  color: var(--brand-muted);
+  font-size: 0.875rem;
+}
+
+.marketing-page .cta-section {
+  width: min(calc(100% - 6rem), 67.75rem);
+  margin-bottom: 6.25rem;
+  padding: 4.5rem 4rem;
+}
+
+.marketing-page .cta-section h2 {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: -0.09375rem;
+  line-height: 1.1;
+}
+
+.marketing-page footer {
+  padding: 2.5rem 3rem;
+}
+
+@media (max-width: 900px) {
+  .marketing-page .section-shell {
+    padding: 5rem 1.5rem;
+  }
+
+  .marketing-page .section-shell > div + div {
+    margin-top: 5rem;
+  }
+
+  .marketing-page .cta-section {
+    width: min(calc(100% - 3rem), 67.75rem);
+    padding: 4.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .marketing-page .section-shell {
+    padding: 4rem 1rem;
+  }
+
+  .marketing-page .feature-grid {
+    margin-top: 2.5rem;
+  }
+
+  .marketing-page .feature-card {
+    min-height: auto;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .marketing-page .cta-section {
+    width: min(calc(100% - 2rem), 67.75rem);
+    margin-bottom: 3rem;
+    padding: 4.25rem 1rem;
+  }
+
+  .marketing-page footer {
+    padding: 2.5rem 1rem;
+  }
+}
+
+/* Direct composition transfer from Landing Final.html. */
+.marketing-page::before {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 40% 48% at 78% 32%, rgba(13, 59, 54, 0.2) 0%, transparent 62%),
+    radial-gradient(ellipse 38% 46% at 86% 42%, rgba(92, 14, 30, 0.19) 0%, rgba(92, 14, 30, 0.08) 34%, transparent 72%),
+    radial-gradient(ellipse 32% 44% at 4% 50%, rgba(13, 59, 54, 0.22) 0%, rgba(13, 59, 54, 0.08) 38%, transparent 78%),
+    radial-gradient(ellipse 30% 36% at 18% 72%, rgba(122, 20, 40, 0.12) 0%, transparent 74%);
+  content: "";
+  opacity: 0.86;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.marketing-page > * {
+  position: relative;
+  z-index: 1;
+}
+
+.marketing-page .hero-copy::before {
+  position: absolute;
+  top: -8%;
+  left: -30%;
+  z-index: -1;
+  width: 35rem;
+  height: 45rem;
+  background:
+    radial-gradient(ellipse 58% 46% at 22% 34%, rgba(13, 59, 54, 0.22) 0%, transparent 72%),
+    radial-gradient(ellipse 45% 40% at 34% 66%, rgba(92, 14, 40, 0.12) 0%, transparent 78%);
+  content: "";
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.marketing-page .hero-emblem-panel::before {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  z-index: -2;
+  width: 36.875rem;
+  height: 36.875rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.1) 0%, transparent 22%),
+    radial-gradient(circle at 48% 50%, rgba(13, 59, 54, 0.22) 0%, transparent 48%),
+    radial-gradient(circle at 60% 48%, rgba(92, 14, 30, 0.18) 0%, transparent 54%);
+  content: "";
+  filter: blur(10px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.marketing-page .hero-emblem-panel::after {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  z-index: -1;
+  width: 31.25rem;
+  height: 31.25rem;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle, rgba(201, 168, 76, 0.055) 0 1px, transparent 1px 18px),
+    conic-gradient(from 210deg, transparent 0deg, rgba(13, 59, 54, 0.24) 76deg, transparent 120deg, rgba(92, 14, 30, 0.2) 235deg, transparent 300deg);
+  content: "";
+  filter: blur(0.3px);
+  opacity: 0.72;
+  transform: translate(-50%, -50%);
+  animation: brand-orbit 140s linear infinite;
+  pointer-events: none;
+}
+
+.marketing-page .hero-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.125rem;
+  margin-top: 2.5rem;
+}
+
+.marketing-page .hero-features span {
+  display: flex;
+  align-items: center;
+  gap: 0.5625rem;
+  color: var(--brand-muted);
+  font-size: 0.84375rem;
+  white-space: nowrap;
+}
+
+.marketing-page .hero-features b {
+  display: inline-grid;
+  width: 1.3125rem;
+  height: 1.3125rem;
+  place-items: center;
+  color: #e0a51d;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.marketing-page .hero-play {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(201, 168, 76, 0.86);
+  border-radius: 50%;
+  color: var(--brand-gold);
+  font-size: 0.68rem;
+}
+
+.marketing-page .clients-strip {
+  padding: 2.375rem 3rem;
+  border-block: 1px solid var(--brand-border);
+  background: var(--brand-black-secondary);
+}
+
+.marketing-page .clients-strip > p {
+  margin-bottom: 1.625rem;
+  color: #42525c;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15625rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.marketing-page .clients-strip > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.marketing-page .clients-strip span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #42525c;
+  font-family: var(--font-strong), sans-serif;
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: 0.03125rem;
+  opacity: 0.7;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+.marketing-page .clients-strip span:hover {
+  color: var(--brand-muted);
+  opacity: 1;
+}
+
+.marketing-page .clients-strip small {
+  margin-top: 0.125rem;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 400;
+  letter-spacing: 0.125rem;
+}
+
+@media (min-width: 901px) {
+  .marketing-page .hero-layout {
+    min-height: calc(100vh - 10rem);
+  }
+
+  .marketing-page .hero-title {
+    max-width: 44rem;
+    margin-bottom: 1.375rem;
+    font-size: clamp(2.25rem, 4.1vw, 3.5rem);
+  }
+
+  .marketing-page .hero-subtitle {
+    max-width: 28.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .marketing-page .hero-actions .button-primary,
+  .marketing-page .hero-actions .button-secondary {
+    min-width: 14.125rem;
+    height: 4rem;
+    justify-content: center;
+    padding: 0.9375rem 1.875rem;
+    font-size: 1.125rem;
+    gap: 1.375rem;
+  }
+
+  .marketing-page .hero-actions .button-secondary {
+    border-color: rgba(201, 168, 76, 0.82);
+    background: rgba(5, 6, 7, 0.34);
+    color: var(--brand-text);
+  }
+
+  .marketing-page .hero-actions .button-secondary:hover {
+    border-color: var(--brand-gold);
+    background: rgba(201, 168, 76, 0.06);
+    color: var(--brand-text);
+    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.14);
+  }
+}
+
+@media (max-width: 900px) {
+  .marketing-page .hero-features {
+    justify-content: center;
+  }
+
+  .marketing-page .clients-strip {
+    padding-inline: 1.5rem;
+  }
+
+  .marketing-page .clients-strip > div {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .marketing-page .hero-actions {
+    width: 100%;
+  }
+
+  .marketing-page .hero-actions .button-primary,
+  .marketing-page .hero-actions .button-secondary {
+    width: 100%;
+    min-height: 3.75rem;
+  }
+
+  .marketing-page .hero-features {
+    gap: 1rem;
+  }
+
+  .marketing-page .hero-features span {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Hero emblem details from the reference: visible orbit points and soft color fields. */
+.marketing-page .hero-seed-orbit {
+  overflow: visible;
+  border-color: rgba(30, 107, 94, 0.24);
+  box-shadow:
+    0 0 45px rgba(13, 59, 54, 0.12),
+    inset 0 0 38px rgba(201, 168, 76, 0.025);
+}
+
+.marketing-page .orbit-dot {
+  position: absolute;
+  display: block;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+}
+
+.marketing-page .orbit-dot-petroleum {
+  top: 50%;
+  right: -0.2rem;
+  background: var(--brand-petroleum-light);
+  box-shadow: 0 0 12px 3px rgba(46, 157, 138, 0.58);
+}
+
+.marketing-page .orbit-dot-wine {
+  top: 50%;
+  left: -0.2rem;
+  width: 0.32rem;
+  height: 0.32rem;
+  background: var(--brand-wine-bright);
+  box-shadow: 0 0 12px 3px rgba(160, 37, 64, 0.52);
+}
+
+.marketing-page .hero-emblem-panel::before {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.1) 0%, transparent 23%),
+    radial-gradient(circle at 37% 46%, rgba(13, 59, 54, 0.32) 0%, rgba(13, 59, 54, 0.12) 25%, transparent 57%),
+    radial-gradient(circle at 66% 52%, rgba(92, 14, 30, 0.28) 0%, rgba(92, 14, 30, 0.1) 27%, transparent 59%);
+  filter: blur(16px);
+  opacity: 0.9;
+}
+
+.marketing-page .hero-emblem-panel::after {
+  background:
+    repeating-radial-gradient(circle, rgba(201, 168, 76, 0.045) 0 1px, transparent 1px 20px),
+    repeating-radial-gradient(circle, transparent 0 3.1rem, rgba(46, 157, 138, 0.035) 3.15rem 3.2rem, transparent 3.25rem 4.5rem),
+    conic-gradient(from 210deg, transparent 0deg, rgba(13, 59, 54, 0.18) 76deg, transparent 120deg, rgba(92, 14, 30, 0.16) 235deg, transparent 300deg);
+  opacity: 0.62;
+}
+
+.marketing-page .hero-actions .button-secondary {
+  border-color: rgba(201, 168, 76, 0.82);
+  background: rgba(5, 6, 7, 0.34);
+  color: var(--brand-text);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.marketing-page .hero-actions .button-secondary:hover {
+  border-color: var(--brand-gold);
+  background: rgba(201, 168, 76, 0.06);
+  color: var(--brand-text);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.14);
+}
+
+.marketing-page .cta-section .button-secondary {
+  border-color: rgba(201, 168, 76, 0.82);
+  background: rgba(5, 6, 7, 0.28);
+  color: var(--brand-gold);
+}
+
+.marketing-page .cta-section .button-secondary:hover {
+  border-color: var(--brand-gold-light);
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--brand-gold-light);
+  box-shadow: 0 8px 26px rgba(201, 168, 76, 0.16);
 }
 
 .lead-modal-backdrop {
@@ -1754,5 +3299,88 @@ body::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+.marketing-page .cta-section .cta-button-gold {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand-gold-light), var(--brand-gold) 58%, var(--brand-gold-dark));
+  color: var(--brand-black);
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.22);
+}
+
+.marketing-page .cta-section .cta-button-gold:hover {
+  border-color: transparent;
+  background: linear-gradient(135deg, #f2dc9a, var(--brand-gold) 55%, var(--brand-gold-dark));
+  color: var(--brand-black);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.34);
+}
+
+/* Landing proportion polish. */
+.marketing-page .hero-actions .button-primary,
+.marketing-page .cta-section .button-primary {
+  border-color: rgba(35, 132, 116, 0.42);
+  background: linear-gradient(135deg, #082f39 0%, #0b514d 52%, #147d69 100%);
+  box-shadow: 0 3px 18px rgba(8, 47, 57, 0.32), inset 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.marketing-page .hero-actions .button-primary:hover,
+.marketing-page .cta-section .button-primary:hover {
+  box-shadow: 0 10px 30px rgba(20, 125, 105, 0.26), inset 0 1px rgba(255, 255, 255, 0.11);
+}
+
+@media (min-width: 901px) {
+  .marketing-page header {
+    top: 0.75rem;
+    padding-inline: 3rem;
+  }
+
+  .marketing-page header nav {
+    width: 100%;
+    max-width: none;
+    height: 4rem;
+    padding-inline: 1.25rem;
+    border: 1px solid var(--brand-border-strong);
+    border-radius: 1.125rem;
+    background:
+      linear-gradient(90deg, rgba(13, 59, 54, 0.08), rgba(5, 6, 7, 0.9) 48%, rgba(92, 14, 30, 0.06)),
+      rgba(5, 6, 7, 0.82);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.32), inset 0 1px rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+  }
+
+  .marketing-page header .brand-logo-emblem {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .marketing-page .hero-premium {
+    padding-top: 6.25rem;
+  }
+
+  .marketing-page .hero-layout {
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    gap: 1.25rem;
+    transform: translateY(-6rem);
+  }
+
+  .marketing-page .hero-emblem-panel {
+    transform: scale(0.91);
+    transform-origin: center;
+  }
+
+  .marketing-page .hero-title {
+    max-width: 43rem;
+    font-size: clamp(2.2rem, 3.9vw, 3.35rem);
+    line-height: 1.095;
+    letter-spacing: -0.0825rem;
+  }
+
+  .marketing-page .hero-premium::before {
+    background:
+      radial-gradient(ellipse 34% 36% at 52% 42%, rgba(201, 168, 76, 0.045), transparent 70%),
+      radial-gradient(ellipse 48% 48% at 73% 40%, rgba(13, 59, 54, 0.2), transparent 66%),
+      radial-gradient(ellipse 42% 46% at 88% 55%, rgba(92, 14, 30, 0.17), transparent 68%),
+      radial-gradient(ellipse 48% 50% at 9% 62%, rgba(13, 59, 54, 0.17), transparent 72%);
   }
 }

@@ -8,7 +8,7 @@ import { Footer } from "@/components/layout/footer";
 
 export default function Home() {
   return (
-    <main>
+    <main className="marketing-page">
       <Navbar />
       <Hero />
       <Solutions />

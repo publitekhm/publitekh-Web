@@ -10,7 +10,7 @@ export function Cta() {
       <p className="relative mt-4 text-base text-mist">Elige tu plan → completa onboarding → configuramos tu agente.</p>
       <div className="relative mt-9 flex flex-wrap justify-center gap-3">
         <Link className="button-primary px-7 py-3.5" href={getOnboardingHref("ventas", "growth")}>Quiero mi agente de ventas →</Link>
-        <Link className="button-secondary px-7 py-3.5" href={getOnboardingHref("contenido", "professional")}>Quiero mi contenido →</Link>
+        <Link className="button-secondary cta-button-gold px-7 py-3.5" href={getOnboardingHref("contenido", "professional")}>Quiero mi contenido →</Link>
       </div>
     </section>
   );

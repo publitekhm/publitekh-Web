@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Fraunces } from "next/font/google";
+import { DM_Sans, Fraunces, Syne } from "next/font/google";
 import "./globals.css";
 import { DemoAccess } from "@/components/layout/demo-access";
 import { LeadModalProvider } from "@/components/ui/lead-modal";
@@ -16,6 +16,12 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-strong",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Publitek | Marketing automation con IA",
   description:
@@ -27,7 +33,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className={`${dmSans.variable} ${fraunces.variable}`}>
+      <body className={`${dmSans.variable} ${fraunces.variable} ${syne.variable}`}>
         <LeadModalProvider>
           {children}
           <DemoAccess />
