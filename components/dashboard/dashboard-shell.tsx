@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { DashboardCard } from "@/components/dashboard/dashboard-card";
 import { DashboardSidebar, dashboardPages, type DashboardPage } from "@/components/dashboard/dashboard-sidebar";
@@ -12,36 +14,50 @@ import { UsageCard } from "@/components/dashboard/usage-card";
 
 type Metric = readonly [string, string, string, string, "green" | "petroleum" | "wine"];
 
-const overviewMetrics: readonly Metric[] = [
-  ["Conversaciones", "384", "+18% vs mes anterior", "↗", "petroleum"],
-  ["Leads nuevos", "96", "17 leads calientes", "✦", "wine"],
-  ["Leads calientes", "17", "Interés alto detectado", "◎", "green"],
-  ["Ventas cerradas", "12", "$8.4M confirmado", "✓", "green"],
-];
-
 const chart = [["Lun", 45], ["Mar", 58], ["Mié", 73], ["Jue", 50], ["Vie", 85], ["Sáb", 68], ["Dom", 40]] as const;
 
 export function DashboardShell() {
   const [activePage, setActivePage] = useState<DashboardPage>("overview");
 
   return (
-    <div className="dashboard-shell">
-      <DashboardSidebar activePage={activePage} onNavigate={setActivePage} />
-      <main className="dashboard-main">
-        <div className="dashboard-mobile-nav">
-          {dashboardPages.map((page) => (
-            <button className={activePage === page.id ? "active" : ""} key={page.id} onClick={() => setActivePage(page.id)} type="button">
-              {page.label}
-            </button>
-          ))}
-        </div>
-        <DashboardTopbar activePage={activePage} />
-        {activePage === "overview" && <Overview />}
-        {activePage === "analytics" && <Analytics />}
-        {activePage === "leads" && <Leads />}
-        {activePage === "handoff" && <Handoff />}
-        {activePage === "payments" && <Payments />}
-      </main>
+    <div className="dashboard-demo-page">
+      <header className="dashboard-reference-header">
+        <Link className="dashboard-reference-header-brand" href="/">
+          <Image alt="" height={44} priority src="/publitek-seed.svg" width={44} />
+          <strong>Publi<span>tek</span></strong>
+        </Link>
+        <nav aria-label="Navegación del dashboard">
+          <button onClick={() => setActivePage("overview")} type="button">Sistema visual</button>
+          <button onClick={() => setActivePage("leads")} type="button">Componentes</button>
+          <button onClick={() => setActivePage("analytics")} type="button">Dashboard</button>
+        </nav>
+        <details className="dashboard-account-menu">
+          <summary>Mi cuenta <span>⌄</span></summary>
+          <div className="dashboard-account-dropdown">
+            <button onClick={() => setActivePage("handoff")} type="button">Configurar cuenta</button>
+            <Link href="/">Cerrar sesión</Link>
+          </div>
+        </details>
+      </header>
+
+      <div className={`dashboard-page dashboard-page-${activePage} dashboard-shell`}>
+        <DashboardSidebar activePage={activePage} onNavigate={setActivePage} />
+        <main className="dashboard-main">
+          <div className="dashboard-mobile-nav">
+            {dashboardPages.map((page) => (
+              <button className={activePage === page.id ? "active" : ""} key={page.id} onClick={() => setActivePage(page.id)} type="button">
+                {page.label}
+              </button>
+            ))}
+          </div>
+          <DashboardTopbar activePage={activePage} />
+          {activePage === "overview" && <Overview />}
+          {activePage === "analytics" && <Analytics />}
+          {activePage === "leads" && <Leads />}
+          {activePage === "handoff" && <Handoff />}
+          {activePage === "payments" && <Payments />}
+        </main>
+      </div>
     </div>
   );
 }
@@ -62,15 +78,35 @@ function MiniRows({ rows }: { rows: readonly (readonly [string, string])[] }) {
 
 function Overview() {
   return (
-    <>
-      <Metrics items={overviewMetrics} />
-      <div className="dashboard-layout"><FunnelCard /><UsageCard /></div>
-      <div className="dashboard-three">
-        <DashboardCard meta="En vivo" title="Actividad reciente"><MiniRows rows={[["Lead caliente detectado", "Hace 4 min"], ["IA pausada por humano", "Hace 19 min"], ["Pago aprobado", "Hace 1 h"]]} /></DashboardCard>
-        <DashboardCard meta="IA / Humano" title="Modo atención"><div className="dashboard-big-value">82%</div><p className="dashboard-note">Conversaciones resueltas por IA</p><MiniRows rows={[["Humano activo", "7 leads"], ["Reactivados", "16 leads"]]} /></DashboardCard>
-        <DashboardCard meta="Pipeline" title="Oportunidades"><div className="dashboard-big-value">$21.8M</div><p className="dashboard-note">Valor abierto estimado</p><MiniRows rows={[["Pago pendiente", "20"], ["Ventas cerradas", "12"]]} /></DashboardCard>
+    <div className="dashboard-overview-structure">
+      <div className="dashboard-overview-metrics">
+        <MetricCard accent="petroleum" label="Conversaciones" note="+18% vs mes anterior" value="384" />
+        <MetricCard accent="wine" label="Leads nuevos" note="17 leads calientes" value="96" />
+        <MetricCard accent="petroleum" label="Leads calientes" note="Interés alto detectado" value="17" />
+        <MetricCard accent="green" label="Ventas cerradas" note="$8.4M confirmado" value="12" />
       </div>
-    </>
+
+      <div className="dashboard-overview-primary">
+        <FunnelCard />
+        <UsageCard />
+      </div>
+
+      <div className="dashboard-overview-secondary">
+        <DashboardCard meta="En vivo" title="Actividad reciente">
+          <MiniRows rows={[["Lead caliente detectado", "Hace 4 min"], ["IA pausada por humano", "Hace 19 min"], ["Pago aprobado", "Hace 1 h"]]} />
+        </DashboardCard>
+        <DashboardCard meta="IA / Humano" title="Modo atención">
+          <div className="dashboard-big-value">82%</div>
+          <p className="dashboard-note">Conversaciones resueltas por IA</p>
+          <MiniRows rows={[["Humano activo", "7 leads"], ["Reactivados", "16 leads"]]} />
+        </DashboardCard>
+        <DashboardCard meta="Pipeline" title="Oportunidades">
+          <div className="dashboard-big-value">$21.8M</div>
+          <p className="dashboard-note">Valor abierto estimado</p>
+          <MiniRows rows={[["Pago pendiente", "20"], ["Ventas cerradas", "12"]]} />
+        </DashboardCard>
+      </div>
+    </div>
   );
 }
 
@@ -86,7 +122,7 @@ function Analytics() {
     <>
       <div className="dashboard-layout">
         <DashboardCard meta="Últimos 7 días" title="Conversaciones por día">
-          <div className="dashboard-chart">{chart.map(([day, value]) => <div key={day}><i style={{ height: `${value}%` }} /><span>{day}</span></div>)}</div>
+          <div className="dashboard-chart">{chart.map(([day, value]) => <div key={day}><div className="dashboard-chart-bar-track"><i style={{ height: `${value}%` }} /></div><span>{day}</span></div>)}</div>
         </DashboardCard>
         <InsightsCard />
       </div>

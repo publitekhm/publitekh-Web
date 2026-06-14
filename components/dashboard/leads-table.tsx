@@ -16,7 +16,7 @@ export function LeadsTable() {
             {leads.map(([name, company, interest, status, mode, action]) => (
               <tr key={name}>
                 <td>{name}</td><td>{company}</td>
-                <td><span className={`dashboard-badge badge-${interest.toLowerCase()}`}>{interest}</span></td>
+                <td><span className={`dashboard-badge dashboard-interest-light badge-${interest.toLowerCase()}`}><i aria-hidden="true" />{interest}</span></td>
                 <td>{status}</td>
                 <td><span className={`dashboard-badge badge-${mode.toLowerCase()}`}>{mode}</span></td>
                 <td>{action}</td>
@@ -28,4 +28,3 @@ export function LeadsTable() {
     </DashboardCard>
   );
 }
-

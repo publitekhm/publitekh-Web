@@ -1,13 +1,11 @@
 "use client";
 
-import Link from "next/link";
-
 export const dashboardPages = [
   { id: "overview", label: "Resumen", icon: "⌂" },
-  { id: "analytics", label: "Analíticas", icon: "↗" },
   { id: "leads", label: "Leads", icon: "◎" },
-  { id: "handoff", label: "IA / Humano", icon: "↔" },
+  { id: "analytics", label: "Analytics", icon: "↗" },
   { id: "payments", label: "Pagos", icon: "$" },
+  { id: "handoff", label: "IA / Humano", icon: "↔" },
 ] as const;
 
 export type DashboardPage = (typeof dashboardPages)[number]["id"];
@@ -20,9 +18,6 @@ interface Props {
 export function DashboardSidebar({ activePage, onNavigate }: Props) {
   return (
     <aside className="dashboard-sidebar">
-      <Link className="dashboard-brand" href="/">
-        <span /><div><strong>Publitek</strong><small>Dashboard demo</small></div>
-      </Link>
       <nav>
         {dashboardPages.map((page) => (
           <button className={activePage === page.id ? "active" : ""} key={page.id} onClick={() => onNavigate(page.id)} type="button">
@@ -38,4 +33,3 @@ export function DashboardSidebar({ activePage, onNavigate }: Props) {
     </aside>
   );
 }
-

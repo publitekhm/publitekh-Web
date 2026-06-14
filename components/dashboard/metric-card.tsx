@@ -11,10 +11,10 @@ interface MetricCardProps {
 export function MetricCard({ label, value, note, accent = "petroleum", icon = "↗" }: MetricCardProps) {
   return (
     <DashboardCard className={`dashboard-metric dashboard-metric-${accent}`}>
-      <div className="dashboard-metric-top"><span>{label}</span><i>{icon}</i></div>
+      <span aria-hidden="true" className="publitek-metric-slide" />
+      <div className="dashboard-metric-top"><span className="dashboard-metric-label">{label}</span><span className="publitek-metric-icon">{icon}</span></div>
       <strong>{value}</strong>
       {note && <p>{note}</p>}
     </DashboardCard>
   );
 }
-
